@@ -86,14 +86,14 @@
         </div>
         <hr class="sidebar-text">
         <a href="${pageContext.request.contextPath}/vista/dashboard_admin.jsp"><i class="fas fa-house"></i><span class="sidebar-text">Dashboard</span></a>
-        <a href="#"><i class="fas fa-user-check"></i><span class="sidebar-text">Asistencias</span></a>
+        <a href="${pageContext.request.contextPath}/AsistenciasServlet"><i class="fas fa-user-check"></i><span class="sidebar-text">Asistencias</span></a>
         <a href="${pageContext.request.contextPath}/trabajadores"><i class="fas fa-users"></i><span class="sidebar-text">Trabajadores</span></a>
         <a href="javascript:void(0);" onclick="toggleSubmenu('reportes')">
             <i class="fas fa-file-pen"></i><span class="sidebar-text">Reportes</span><i class="fas fa-caret-down ms-auto"></i>
         </a>
         <div id="submenu-reportes" class="submenu">
-            <a href="#"><span class="sidebar-text">Reporte General</span></a>
-            <a href="#"><span class="sidebar-text">Mi Reporte Personal</span></a>
+            <a href="${pageContext.request.contextPath}/ReporteGeneralServlet"><span class="sidebar-text">Reporte General</span></a>
+            <a href="${pageContext.request.contextPath}/vista/reporte_personal.jsp"><span class="sidebar-text">Mi Reporte Personal</span></a>
         </div>
         <a href="#"><i class="fas fa-file-lines"></i><span class="sidebar-text">Justificaciones</span></a>
         <hr class="sidebar-text">
@@ -102,7 +102,9 @@
         </a>
         <div id="submenu-opciones" class="submenu">
             <a href="#"><i class="fas fa-rotate"></i><span class="sidebar-text">Cambiar Contraseña</span></a>
-            <a href="#"><i class="fas fa-right-from-bracket"></i><span class="sidebar-text">Salir</span></a>
+            
+<a href="${pageContext.request.contextPath}/CerrarSesion"><i class="fas fa-right-from-bracket"></i><span class="sidebar-text">Salir</span></a>
+
         </div>
     </div>
     <div class="flex-grow-1">
@@ -223,15 +225,11 @@
             <div class="col-md-6 mt-3">
               <label>Área</label>
               <select class="form-select" name="area" required>
-                <option>Atención al Cliente</option>
-                <option>Plataforma</option>
-                <option>Administración</option>
+                <option>Atencion al Cliente</option>
                 <option>Marketing y Comunicacion</option>
                 <option>Comercial y Ventas</option>
                 <option>Finanzas y Contabilidad</option>
-                <option>Atención al Cliente</option>
-                <option>Plataforma</option>
-                <option>Administración</option>
+                <option>Tecnologia de la Informacion(TI)</option>
               </select>
             </div>
             <div class="col-md-6 mt-3">
@@ -239,17 +237,16 @@
               <select class="form-select" name="cargo" required>
                 <option>Cajero</option>
                 <option>Asesor</option>
-                <option>Jefe de Área</option>
+                <option>Jefe de Area</option>
                 <option>Community manager</option>
-                <option>Diseñador gráfico</option>
+                <option>Diseñador grafico</option>
                 <option>Ejecutivo de ventas</option>
                 <option>Coordinador comercial</option>
                 <option>Contador</option>
                 <option>Analista financiero</option>
                 <option>Tesorero</option>
-                <option>Cajero</option>
-                <option>Asesor</option>
-                <option>Jefe de Área</option>
+                <option>Soporte tecnico</option>
+                <option>Desarrolladores</option>
               </select>
             </div>
             <div class="col-md-6 mt-3">
@@ -262,9 +259,10 @@
             <div class="col-md-6 mt-3">
               <label>Horario</label>
               <select class="form-select" name="horario" required>
-                <option>Lunes - Viernes 08:00 - 16:00</option>
-                <option>Lunes - Sábado 09:00 - 18:00</option>
-                <option>Turno Tarde 13:00 - 21:00</option>
+                <option>Lunes - Viernes 08:00:00 - 16:00:00</option>
+                <option>Lunes - Sabado 09:00:00 - 18:00:00</option>
+                <option>Lunes - Viernes 08:30:00 - 15:30:00</option>
+                <option>Lunes - Viernes 10:00:00 - 19:00:00</option>
               </select>
             </div>
             <div class="col-12 mt-3">
@@ -362,36 +360,19 @@ $/.test(dni)) {
             <div class="col-md-6 mt-3">
               <label>Área</label>
               <select class="form-select" name="area" required>
-                <option>Atención al Cliente</option>
-                <option>Plataforma</option>
-                <option>Administración</option>
-                <option>Marketing y Comunicacion</option>
-                <option>Comercial y Ventas</option>
-                <option>Finanzas y Contabilidad</option>
-                <option <%= "Atención al Cliente".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Atención al Cliente</option>
-                <option <%= "Plataforma".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Plataforma</option>
-                <option <%= "Administración".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Administración</option>
-                <option <%= "Marketing y Comunicación".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Marketing y Comunicación</option>
+                <option <%= "Atencion al Cliente".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Atencion al Cliente</option>
+                <option <%= "Marketing y Comunicacion".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Marketing y Comunicación</option>
                 <option <%= "Comercial y Ventas".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Comercial y Ventas</option>
                 <option <%= "Finanzas y Contabilidad".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Finanzas y Contabilidad</option>
+                <option <%= "Tecnologia de la Informacion(TI)".equals(trabajadorEditar.getArea()) ? "selected" : "" %>>Tecnologia de la Informacion(TI)</option>
               </select>
             </div>
             <div class="col-md-6 mt-3">
               <label>Cargo</label>
               <select class="form-select" name="cargo" required>
-                <option>Cajero</option>
-                <option>Asesor</option>
-                <option>Jefe de Área</option>
-                <option>Community manager</option>
-                <option>Diseñador gráfico</option>
-                <option>Ejecutivo de ventas</option>
-                <option>Coordinador comercial</option>
-                <option>Contador</option>
-                <option>Analista financiero</option>
-                <option>Tesorero</option>
                 <option <%= "Cajero".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Cajero</option>
                 <option <%= "Asesor".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Asesor</option>
-                <option <%= "Jefe de Área".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Jefe de Área</option>
+                <option <%= "Jefe de Área".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Jefe de Area</option>
                 <option <%= "Community manager".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Community manager</option>
                 <option <%= "Diseñador gráfico".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Diseñador gráfico</option>
                 <option <%= "Ejecutivo de ventas".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Ejecutivo de ventas</option>
@@ -399,6 +380,8 @@ $/.test(dni)) {
                 <option <%= "Contador".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Contador</option>
                 <option <%= "Analista financiero".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Analista financiero</option>
                 <option <%= "Tesorero".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Tesorero</option>
+                <option <%= "Soporte Tecnico".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Soporte Tecnico</option>
+                <option <%= "Desarrolladores".equals(trabajadorEditar.getCargo()) ? "selected" : "" %>>Desarrolladores</option>
               </select>
             </div>
             <div class="col-md-6 mt-3">
@@ -411,9 +394,10 @@ $/.test(dni)) {
             <div class="col-md-6 mt-3">
               <label>Horario</label>
               <select class="form-select" name="horario" required>
-                <option <%= "Lunes - Viernes 08:00 - 16:00".equals(trabajadorEditar.getHorario()) ? "selected" : "" %>>Lunes - Viernes 08:00 - 16:00</option>
-                <option <%= "Lunes - Sábado 09:00 - 18:00".equals(trabajadorEditar.getHorario()) ? "selected" : "" %>>Lunes - Sábado 09:00 - 18:00</option>
-                <option <%= "Turno Tarde 13:00 - 21:00".equals(trabajadorEditar.getHorario()) ? "selected" : "" %>>Turno Tarde 13:00 - 21:00</option>
+                <option <%= "Lunes - Viernes 08:00:00 - 16:00:00".equals(trabajadorEditar.getHorario()) ? "selected" : "" %>>Lunes - Viernes 08:00:00 - 16:00:00</option>
+                <option <%= "Lunes - Sábado 09:00:00 - 18:00:00".equals(trabajadorEditar.getHorario()) ? "selected" : "" %>>Lunes - Sábado 09:00:00 - 18:00:00</option>
+                <option <%= "Lunes - Viernes 08:30:00 - 15:30:00".equals(trabajadorEditar.getHorario()) ? "selected" : "" %>>Lunes - Viernes 08:30:00 - 15:30:00</option>
+                <option <%= "Lunes - Viernes 10:00:00 - 19:00:00".equals(trabajadorEditar.getHorario()) ? "selected" : "" %>>Lunes - Viernes 10:00:00 - 19:00:00</option>
               </select>
             </div>
             <div class="col-12 mt-3">
@@ -433,28 +417,28 @@ $/.test(dni)) {
 <% } %>
 
 
+
 <script>
   function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    const textos = sidebar.querySelectorAll(".sidebar-text");
-    const submenu = sidebar.querySelectorAll(".submenu");
-
-    sidebar.classList.toggle("sidebar-collapsed");
-
-    if (sidebar.classList.contains("sidebar-collapsed")) {
-      textos.forEach(t => t.style.display = "none");
-      submenu.forEach(s => s.classList.remove("show"));
-      sidebar.style.width = "80px";
-    } else {
-      textos.forEach(t => t.style.display = "inline");
-      sidebar.style.width = "250px";
-    }
+    document.getElementById("sidebar").classList.toggle("sidebar-collapsed");
   }
-  
-function exportarPDF() {
-  const params = new URLSearchParams(window.location.search);
-  window.location.href = '${pageContext.request.contextPath}/ExportarTrabajadoresServlet?' + params.toString();
-}
+
+  function toggleSubmenu(id) {
+    const submenu = document.getElementById('submenu-' + id);
+    submenu.classList.toggle("show");
+  }
+
+  // Restore submenu state if needed
+  document.addEventListener("DOMContentLoaded", () => {
+    const submenuIds = ["reportes", "opciones"];
+    submenuIds.forEach(id => {
+      const link = document.querySelector(`[onclick*="toggleSubmenu('${id}')"]`);
+      if (link) {
+        link.addEventListener("click", () => toggleSubmenu(id));
+      }
+    });
+  });
 </script>
+
 </body>
 </html>
