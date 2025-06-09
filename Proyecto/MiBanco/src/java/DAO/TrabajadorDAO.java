@@ -172,4 +172,40 @@ public class TrabajadorDAO {
 
         return null;
     }
+
+    public Trabajador obtenerPorDNI(String dni) {
+        String sql = "SELECT t.ID_Trabajador, u.Nombre_Completo, u.DNI, u.Correo, u.Telefono, " +
+                     "t.Area, t.Cargo, t.TipoTurno, t.Horario, t.Observaciones " +
+                     "FROM trabajador t " +
+                     "INNER JOIN usuario u ON t.ID_Usuario = u.ID_Usuario " +
+                     "WHERE u.DNI = ?";
+
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, dni);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Trabajador t = new Trabajador();
+                t.setId(rs.getInt("ID_Trabajador"));
+                t.setNombreCompleto(rs.getString("Nombre_Completo"));
+                t.setDni(rs.getString("DNI"));
+                t.setCorreo(rs.getString("Correo"));
+                t.setTelefono(rs.getString("Telefono"));
+                t.setArea(rs.getString("Area"));
+                t.setCargo(rs.getString("Cargo"));
+                t.setTipoTurno(rs.getString("TipoTurno"));
+                t.setHorario(rs.getString("Horario"));
+                t.setObservaciones(rs.getString("Observaciones"));
+                return t;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Error en obtenerPorDNI:");
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

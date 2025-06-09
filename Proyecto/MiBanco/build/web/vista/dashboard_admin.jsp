@@ -1,9 +1,3 @@
-<%-- 
-    Document   : dashboard_admin
-    Created on : 14 may. 2025, 13:29:47
-    Author     : AlonsoPC
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="modelo.Usuario" %>
 <%@ page import="DAO.DashboardDAO" %>
@@ -77,14 +71,14 @@
         </div>
         <hr class="sidebar-text">
         <a href="${pageContext.request.contextPath}/vista/dashboard_admin.jsp"><i class="fas fa-house"></i><span class="sidebar-text">Dashboard</span></a>
-        <a href="#"><i class="fas fa-user-check"></i><span class="sidebar-text">Asistencias</span></a>
+        <a href="${pageContext.request.contextPath}/AsistenciasServlet"><i class="fas fa-user-check"></i><span class="sidebar-text">Asistencias</span></a>
         <a href="${pageContext.request.contextPath}/trabajadores"><i class="fas fa-users"></i><span class="sidebar-text">Trabajadores</span></a>
         <a href="javascript:void(0);" onclick="toggleSubmenu('reportes')">
             <i class="fas fa-file-pen"></i><span class="sidebar-text">Reportes</span><i class="fas fa-caret-down ms-auto"></i>
         </a>
         <div id="submenu-reportes" class="submenu">
-            <a href="#"><span class="sidebar-text">Reporte General</span></a>
-            <a href="#"><span class="sidebar-text">Mi Reporte Personal</span></a>
+            <a href="${pageContext.request.contextPath}/ReporteGeneralServlet"><span class="sidebar-text">Reporte General</span></a>
+            <a href="${pageContext.request.contextPath}/vista/reporte_personal.jsp"><span class="sidebar-text">Mi Reporte Personal</span></a>
         </div>
         <a href="#"><i class="fas fa-file-lines"></i><span class="sidebar-text">Justificaciones</span></a>
         <hr class="sidebar-text">
@@ -93,7 +87,9 @@
         </a>
         <div id="submenu-opciones" class="submenu">
             <a href="#"><i class="fas fa-rotate"></i><span class="sidebar-text">Cambiar Contraseña</span></a>
-            <a href="#"><i class="fas fa-right-from-bracket"></i><span class="sidebar-text">Salir</span></a>
+            
+<a href="${pageContext.request.contextPath}/CerrarSesion"><i class="fas fa-right-from-bracket"></i><span class="sidebar-text">Salir</span></a>
+
         </div>
     </div>
 
@@ -202,11 +198,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
